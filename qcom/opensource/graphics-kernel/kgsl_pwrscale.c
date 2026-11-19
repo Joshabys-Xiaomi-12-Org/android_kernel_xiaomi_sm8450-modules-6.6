@@ -18,6 +18,7 @@ static struct devfreq_msm_adreno_tz_data adreno_tz_data = {
 		.floating = true,
 	},
 	.mod_percent = 100,
+	.disable_busy_time_burst = true,
 };
 
 static void do_devfreq_suspend(struct work_struct *work);
@@ -675,9 +676,10 @@ int kgsl_pwrscale_init(struct kgsl_device *device, struct platform_device *pdev,
 		governor = "performance";
 
 	/* initialize msm-adreno-tz governor specific data here */
-	adreno_tz_data.disable_busy_time_burst =
-		of_property_read_bool(pdev->dev.of_node,
-		"qcom,disable-busy-time-burst");
+	if (of_property_read_bool(pdev->dev.of_node, "qcom,enable-busy-time-burst"))
+		adreno_tz_data.disable_busy_time_burst = false;
+	else
+		adreno_tz_data.disable_busy_time_burst = true;
 
 	if (pwrscale->ctxt_aware_enable) {
 		adreno_tz_data.ctxt_aware_enable = pwrscale->ctxt_aware_enable;

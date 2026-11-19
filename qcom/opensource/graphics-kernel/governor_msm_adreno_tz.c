@@ -156,15 +156,44 @@ static ssize_t mod_percent_show(struct device *dev,
 	return scnprintf(buf, PAGE_SIZE, "%u\n", priv->mod_percent);
 }
 
+static ssize_t disable_busy_time_burst_store(struct device *dev,
+			struct device_attribute *attr,
+			const char *buf, size_t count)
+{
+	int ret;
+	bool val;
+	struct devfreq *devfreq = to_devfreq(dev);
+	struct devfreq_msm_adreno_tz_data *priv = devfreq->data;
+
+	ret = kstrtobool(buf, &val);
+	if (ret)
+		return ret;
+
+	priv->disable_busy_time_burst = val;
+
+	return count;
+}
+
+static ssize_t disable_busy_time_burst_show(struct device *dev,
+			struct device_attribute *attr, char *buf)
+{
+	struct devfreq *devfreq = to_devfreq(dev);
+	struct devfreq_msm_adreno_tz_data *priv = devfreq->data;
+
+	return scnprintf(buf, PAGE_SIZE, "%u\n", priv->disable_busy_time_burst);
+}
+
 static DEVICE_ATTR_RO(gpu_load);
 
 static DEVICE_ATTR_RO(suspend_time);
 static DEVICE_ATTR_RW(mod_percent);
+static DEVICE_ATTR_RW(disable_busy_time_burst);
 
 static const struct device_attribute *adreno_tz_attr_list[] = {
 		&dev_attr_gpu_load,
 		&dev_attr_suspend_time,
 		&dev_attr_mod_percent,
+		&dev_attr_disable_busy_time_burst,
 		NULL
 };
 
