@@ -23,6 +23,7 @@
 #include <soc/qcom/dcvs.h>
 #include <soc/qcom/socinfo.h>
 #include <linux/suspend.h>
+#include <linux/state_notifier.h>
 
 #include "adreno.h"
 #include "adreno_a5xx.h"
@@ -35,6 +36,7 @@
 #include "kgsl_reclaim.h"
 #include "kgsl_trace.h"
 #include "kgsl_util.h"
+#include "msm_adreno_devfreq.h"
 
 /* Include the master list of GPU cores that are supported */
 #include "adreno-gpulist.h"
@@ -4029,6 +4031,9 @@ static int __init kgsl_3d_init(void)
 		gmu_core_unregister();
 		kgsl_mmu_exit();
 		kgsl_core_exit();
+	} else {
+		state_notifier_init();
+		adreno_idler_init();
 	}
 
 	return ret;
@@ -4040,6 +4045,8 @@ static void __exit kgsl_3d_exit(void)
 	gmu_core_unregister();
 	kgsl_mmu_exit();
 	kgsl_core_exit();
+	adreno_idler_exit();
+	state_notifier_exit();
 }
 
 module_param_named(preempt_enable, adreno_preemption_enable, bool, 0600);

@@ -32,6 +32,8 @@ struct devfreq_msm_adreno_tz_data {
 	struct {
 		s64 total_time;
 		s64 busy_time;
+		int last_level;
+		int cycles_keeping_level;
 		u32 ctxt_aware_target_pwrlevel;
 		u32 ctxt_aware_busy_penalty;
 	} bin;
@@ -80,5 +82,10 @@ int devfreq_vbif_update_bw(void);
 void devfreq_vbif_register_callback(getbw_func func, void *data);
 
 int msm_adreno_tz_reinit(struct devfreq *devfreq);
+
+int adreno_idler(struct devfreq_dev_status stats, struct devfreq *devfreq,
+		 unsigned long *freq);
+int adreno_idler_init(void);
+void adreno_idler_exit(void);
 
 #endif

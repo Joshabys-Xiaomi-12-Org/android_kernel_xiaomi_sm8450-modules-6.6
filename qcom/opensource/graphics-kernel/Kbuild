@@ -170,12 +170,14 @@ msm_kgsl-y += \
 	adreno_rpmh.o \
 	adreno_hwsched.o \
 	adreno_hwsched_snapshot.o \
+	adreno_idler.o \
 	adreno_ioctl.o \
 	adreno_perfcounter.o \
 	adreno_ringbuffer.o \
 	adreno_snapshot.o \
 	adreno_sysfs.o \
-	adreno_trace.o
+	adreno_trace.o \
+	state_notifier.o
 
 ifndef CONFIG_DEVFREQ_GOV_QCOM_ADRENO_TZ
 	msm_kgsl-y += governor_msm_adreno_tz.o

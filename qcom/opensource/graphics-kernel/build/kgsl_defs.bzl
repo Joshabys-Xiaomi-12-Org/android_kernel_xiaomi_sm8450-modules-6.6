@@ -4,6 +4,7 @@ load("//vendor/xiaomi/sm8450-kernel:target_variants.bzl", "get_all_la_variants")
 
 msm_kgsl_includes = [
     "include/linux/msm_kgsl.h",
+    "include/linux/state_notifier.h",
     "include/uapi/linux/msm_kgsl.h",
 ]
 
@@ -55,6 +56,7 @@ def kgsl_get_srcs():
         "adreno_rpmh.c",
         "adreno_hwsched.c",
         "adreno_hwsched_snapshot.c",
+        "adreno_idler.c",
         "adreno_ioctl.c",
         "adreno_perfcounter.c",
         "adreno_ringbuffer.c",
@@ -78,6 +80,7 @@ def kgsl_get_srcs():
         "kgsl_trace.c",
         "kgsl_util.c",
         "kgsl_vbo.c",
+        "state_notifier.c",
     ]
 
     srcs = srcs + native.glob(["*.h"]) + msm_kgsl_includes
