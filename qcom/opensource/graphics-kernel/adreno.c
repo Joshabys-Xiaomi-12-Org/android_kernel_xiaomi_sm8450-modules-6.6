@@ -234,7 +234,7 @@ void adreno_touch_wake(struct kgsl_device *device)
 		return;
 
 	if (device->state == KGSL_STATE_SLUMBER)
-		schedule_work(&adreno_dev->input_work);
+		queue_work(system_highpri_wq, &adreno_dev->input_work);
 }
 
 /*
