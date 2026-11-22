@@ -25,6 +25,7 @@
 
 #include "governor.h"
 #include "msm_adreno_devfreq.h"
+#include "adreno_idler.h"
 
 static DEFINE_SPINLOCK(tz_lock);
 static DEFINE_SPINLOCK(sample_lock);

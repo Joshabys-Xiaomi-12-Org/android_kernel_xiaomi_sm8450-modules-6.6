@@ -83,9 +83,4 @@ void devfreq_vbif_register_callback(getbw_func func, void *data);
 
 int msm_adreno_tz_reinit(struct devfreq *devfreq);
 
-int adreno_idler(struct devfreq_dev_status stats, struct devfreq *devfreq,
-		 unsigned long *freq);
-int adreno_idler_init(void);
-void adreno_idler_exit(void);
-
 #endif

@@ -36,7 +36,7 @@
 #include "kgsl_reclaim.h"
 #include "kgsl_trace.h"
 #include "kgsl_util.h"
-#include "msm_adreno_devfreq.h"
+#include "adreno_idler.h"
 
 /* Include the master list of GPU cores that are supported */
 #include "adreno-gpulist.h"
